@@ -37,6 +37,9 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #target_link_libraries(${PROJECT_NAME} another_library)
 #
 # CATKIN_MIGRATION: removed during catkin migration
+
+
+include_directories(${catkin_INCLUDE_DIRS})
 add_library(interactive_marker_helpers
 src/interactive_marker_helpers.cpp
 )

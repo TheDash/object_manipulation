@@ -48,7 +48,6 @@ add_definitions(${EIGEN_DEFINITIONS})
 
 include_directories(${catkin_INCLUDE_DIRS})
 
-add_dependencies(${PROJECT_NAME}_tools object_manipulation_msgs_gen_cpp)
 # CATKIN_MIGRATION: removed during catkin migration
 # rosbuild_add_boost_directories()
 
@@ -67,6 +66,7 @@ add_library(${PROJECT_NAME}_tools src/tools/mechanism_interface.cpp
                                            )
 target_link_libraries(${PROJECT_NAME}_tools ${Boost_LIBRARIES})
 
+add_dependencies(${PROJECT_NAME}_tools object_manipulation_msgs_generate_messages_cpp)
 add_library(${PROJECT_NAME}_grasp_execution src/tools/mechanism_interface.cpp
                                                      src/grasp_execution/grasp_tester_fast.cpp
 						     src/grasp_execution/approach_lift_grasp.cpp)
