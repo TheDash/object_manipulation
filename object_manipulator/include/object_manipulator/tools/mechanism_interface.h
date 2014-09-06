@@ -45,22 +45,22 @@
 
 #include <geometry_msgs/Vector3.h>
 
-#include <kinematics_msgs/GetKinematicSolverInfo.h>
-#include <kinematics_msgs/GetConstraintAwarePositionIK.h>
-#include <kinematics_msgs/GetPositionFK.h>
+#include <moveit_msgs/GetKinematicSolverInfo.h>
+#include <moveit_msgs/GetConstraintAwarePositionIK.h>
+#include <moveit_msgs/GetPositionFK.h>
 
 #include <arm_navigation_msgs/MoveArmAction.h>
 
-#include <arm_navigation_msgs/GetMotionPlan.h>
+#include <moveit_msgs/GetMotionPlan.h>
 #include <arm_navigation_msgs/convert_messages.h>
 #include <arm_navigation_msgs/FilterJointTrajectory.h>
-#include <arm_navigation_msgs/OrderedCollisionOperations.h>
+#include <object_manipulation_msgs/OrderedCollisionOperations.h>
 
 #include <pr2_controllers_msgs/JointTrajectoryAction.h>
 #include <pr2_controllers_msgs/PointHeadAction.h>
 
-#include <arm_navigation_msgs/ContactInformation.h>
-#include <arm_navigation_msgs/GetStateValidity.h>
+#include <moveit_msgs/ContactInformation.h>
+#include <moveit_msgs/GetStateValidity.h>
 #include <arm_navigation_msgs/SetPlanningSceneDiff.h>
 #include <arm_navigation_msgs/GetRobotState.h>
 
