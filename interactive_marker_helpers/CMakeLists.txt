@@ -21,7 +21,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp interactive_markers sensor_msgs v
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 #set(ROS_BUILD_TYPE RelWithDebInfo)
 
-
+include_directories(include)
 # CATKIN_MIGRATION: removed during catkin migration
 # rosbuild_init()
 
@@ -31,21 +31,15 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 #uncomment if you have defined messages
-#add_message_files(
-  FILES
-  # TODO: List your msg files here
-)
-#uncomment if you have defined services
-#add_service_files(
-  FILES
-  # TODO: List your msg files here
-)
 
 #common commands for building c++ executables and libraries
 #add_library(${PROJECT_NAME} src/example.cpp)
 #target_link_libraries(${PROJECT_NAME} another_library)
 #
 # CATKIN_MIGRATION: removed during catkin migration
+add_library(interactive_marker_helpers
+src/interactive_marker_helpers.cpp
+)
 # rosbuild_add_boost_directories()
 #find_package(Boost REQUIRED COMPONENTS thread)
 include_directories(${Boost_INCLUDE_DIRS})
@@ -53,10 +47,6 @@ target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 #add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
-add_library(interactive_marker_helpers
-src/interactive_marker_helpers.cpp
-manifest.xml
-)
 
 
 # Check for SSE
@@ -67,15 +57,14 @@ manifest.xml
 
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-    #TODO DEPENDENCIES geometry_msgs std_msgs
-)
 
 # catkin_package parameters: http://ros.org/doc/groovy/api/catkin/html/dev_guide/generated_cmake_api.html#catkin-package
 # TODO: fill in what other packages will need to use this package
 catkin_package(
     DEPENDS roscpp interactive_markers sensor_msgs visualization_msgs geometry_msgs tf object_manipulator
     CATKIN_DEPENDS # TODO
-    INCLUDE_DIRS # TODO include
+    INCLUDE_DIRS include include/${PROJECT_NAME} # TODO include
     LIBRARIES # TODO
 )
+
+install(DIRECTORY include/${PROJECT_NAME} DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})

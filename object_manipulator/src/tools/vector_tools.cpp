@@ -31,7 +31,7 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-#include <arm_navigation_msgs/OrderedCollisionOperations.h>
+#include <object_manipulation_msgs/OrderedCollisionOperations.h>
 
 #include "object_manipulator/tools/vector_tools.h"
 

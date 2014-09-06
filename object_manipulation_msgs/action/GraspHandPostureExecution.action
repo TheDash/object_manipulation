@@ -19,7 +19,7 @@ float32 max_contact_force
 
 ---
 # the result of the action
-ManipulationResult result
+manipulation_msgs/ManipulationResult result
 
 ---
 # empty for now

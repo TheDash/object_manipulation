@@ -22,9 +22,6 @@ find_package(catkin REQUIRED COMPONENTS roscpp interactive_markers sensor_msgs v
 #set(ROS_BUILD_TYPE RelWithDebInfo)
 
 #generate the actions
-rosbuild_find_ros_package(actionlib_msgs)
-include(${actionlib_msgs_PACKAGE_PATH}/cmake/actionbuild.cmake)
-genaction()
 
 
 # CATKIN_MIGRATION: removed during catkin migration
@@ -36,40 +33,33 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 #uncomment if you have defined messages
-add_message_files(
-  FILES
-  # TODO: List your msg files here
-)
-#uncomment if you have defined services
-#add_service_files(
-  FILES
-  # TODO: List your msg files here
-)
-
 #common commands for building c++ executables and libraries
 #add_library(${PROJECT_NAME} src/example.cpp)
 #target_link_libraries(${PROJECT_NAME} another_library)
 #
+
+add_action_files(
+  FILES
+  StoreCloud.action
+)
 # CATKIN_MIGRATION: removed during catkin migration
 # rosbuild_add_boost_directories()
+add_executable(point_cloud_server
+src/cloud_server.cpp
+src/cloud_handler.cpp
+#src/marker_helpers.h
+#src/marker_helpers.cpp
+)
 #find_package(Boost REQUIRED COMPONENTS thread)
 include_directories(${Boost_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 #add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
-add_executable(point_cloud_server
-src/cloud_server.cpp
-src/cloud_handler.cpp
-#src/marker_helpers.h
-#src/marker_helpers.cpp
-action/StoreCloud.action
-manifest.xml
-)
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
-    #TODO DEPENDENCIES geometry_msgs std_msgs
+    DEPENDENCIES geometry_msgs std_msgs sensor_msgs actionlib_msgs
 )
 
 # catkin_package parameters: http://ros.org/doc/groovy/api/catkin/html/dev_guide/generated_cmake_api.html#catkin-package
@@ -80,3 +70,7 @@ catkin_package(
     INCLUDE_DIRS # TODO include
     LIBRARIES # TODO
 )
+
+install(DIRECTORY launch/ DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+

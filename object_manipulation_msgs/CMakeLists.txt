@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(object_manipulation_msgs)
 # Load catkin and all dependencies required for this package
 # TODO: remove all from COMPONENTS that are not catkin packages.
-find_package(catkin REQUIRED COMPONENTS actionlib_msgs std_msgs geometry_msgs sensor_msgs trajectory_msgs sensor_msgs household_objects_database_msgs shape_msgs manipulation_msgs)
+find_package(catkin REQUIRED COMPONENTS actionlib_msgs std_msgs geometry_msgs sensor_msgs trajectory_msgs sensor_msgs household_objects_database_msgs shape_msgs manipulation_msgs moveit_msgs)
 
 # include_directories(include ${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS})
 # CATKIN_MIGRATION: removed during catkin migration
@@ -43,6 +43,12 @@ add_service_files(
   FindClusterBoundingBox2.srv	
 )
 
+add_message_files(
+  FILES
+  CollisionOperation.msg
+  OrderedCollisionOperations.msg
+)
+
 add_action_files(
    FILES
    FindContainer.action
@@ -62,23 +68,22 @@ add_action_files(
 # rosbuild_add_boost_directories()
 #find_package(Boost REQUIRED COMPONENTS thread)
 include_directories(${Boost_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 #add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
-    DEPENDENCIES geometry_msgs std_msgs sensor_msgs manipulation_msgs
+    DEPENDENCIES geometry_msgs std_msgs sensor_msgs manipulation_msgs moveit_msgs 
 )
 
 # catkin_package parameters: http://ros.org/doc/groovy/api/catkin/html/dev_guide/generated_cmake_api.html#catkin-package
 # TODO: fill in what other packages will need to use this package
 catkin_package(
-    DEPENDS actionlib_msgs std_msgs geometry_msgs sensor_msgs trajectory_msgs sensor_msgs household_objects_database_msgs shape_msgs arm_navigation_msgs manipulation_msgs
+    DEPENDS actionlib_msgs std_msgs geometry_msgs sensor_msgs trajectory_msgs sensor_msgs household_objects_database_msgs shape_msgs manipulation_msgs
     CATKIN_DEPENDS # TODO
-    INCLUDE_DIRS # TODO include
+    INCLUDE_DIRS include # TODO include
     LIBRARIES # TODO
 )
 
 install(DIRECTORY include/
-DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
+DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 
